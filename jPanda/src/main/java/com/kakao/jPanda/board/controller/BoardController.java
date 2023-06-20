@@ -34,9 +34,9 @@ public class BoardController {
 	@ResponseBody
 	@GetMapping("/talents")
 	public HashMap<String, Object> talentList(FiltersDto filters){
-		log.info("Controller talentList Start");
+		log.info("TalentList Controller Start");
 		
-		HashMap<String, Object> map =boardService.findTalentListByFilter(filters);
+		HashMap<String, Object> map = boardService.findTalentListByFilter(filters);
 
 		return map;
 	}
@@ -45,8 +45,8 @@ public class BoardController {
 	// 대분류 카테고리 리스트 불러오기
 	@NoLoginCheck
 	@GetMapping("")
-	public String boardView(@RequestParam(required=false) String search, Model model) {
-		log.info("Controller boardList Start");
+	public String upperCategoryList(@RequestParam(required=false) String search, Model model) {
+		log.info("UpperCategoryList Controller Start");
 		
 		List<CategoryDto> upperCategoryList = boardService.findUpperCategoryList();
 		
@@ -65,7 +65,7 @@ public class BoardController {
 	@ResponseBody
 	@GetMapping("/categorys/lower-category-nos") 
 	public List<CategoryDto> lowerCategoryListByUpperCategoryNo(@RequestParam Long upperCategoryNo) {
-		log.info("Controller lowerCategoryListByUpperCategoryNo Start");
+		log.info("LowerCategoryList Controller Start");
 		
 		List<CategoryDto> lowerCategotyList = boardService.findLowerCategoryListByUpperCategoryNo(upperCategoryNo);
 		

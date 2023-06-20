@@ -26,7 +26,7 @@ ul, li {
 	padding: 0;
 }  
 
-
+ 
 .talent-info {
 	margin-top: 10px;
 	position: relative;
@@ -75,7 +75,7 @@ ul, li {
 	text-align: left;
 	width: 50%;
 	height: 430px;
-}
+} 
 
 
 #name {
@@ -538,7 +538,7 @@ ul, li {
 		  	reportModal.querySelector('#blackId').value = blackId
 		  	reportModal.querySelector('#title').value = title
 		  	reportModal.querySelector('#issue').value = issue.value
-		  	reportModal.querySelector('form').setAttribute('action', "/talents/talent/" + talentNo + "/report");
+		  	reportModal.querySelector('form').setAttribute('action', "/talent/" + talentNo + "/report");
 		  	const cancelButton = reportModal.querySelector('.cancel-btn')
 		  	cancelButton.addEventListener('click', () => {
 			    reportModal.querySelector('form').reset()
@@ -565,7 +565,7 @@ ul, li {
 		        purchaseDate : new Date(Date.now())
 		    };
 			$.ajax({
-				url 	: "/talents/bambooUse",
+				url 	: "/talent/bambooUse",
 				method 	: 'POST',
 				data  	: JSON.stringify(bambooUse),
 				contentType: 'application/json',
@@ -642,7 +642,7 @@ ul, li {
 	    	var talentNo = $(this).data('talentno');
 	    	$.ajax({
 	    		type : 'PUT',
-	    		url  : "/talents/talent/" + talentNo + "/status",
+	    		url  : "/talent/" + talentNo + "/status",
 	    		data : JSON.stringify({
 	    			talentNo : talentNo
 	    		}),
@@ -688,7 +688,7 @@ ul, li {
 		} 
 		$.ajax({
 		    type : 'POST',
-		    url : "/talents/talent/" + talentNo + "/review",
+		    url : "/talent/" + talentNo + "/review",
 		    data : JSON.stringify({
 				talentNo 	: talentNo,
 				reviewerId  : memberId,
@@ -734,7 +734,7 @@ ul, li {
 		
 	  	$.ajax({
 	  		type : 'PUT',
-	  		url : "/talents/talent/" + talentNo + "/reviews/" + reviewNo,
+	  		url : "/talent/" + talentNo + "/reviews/" + reviewNo,
 			data : JSON.stringify({
 				talentNo 	: talentNo,
 			    reviewNo 	: reviewNo,
@@ -788,7 +788,7 @@ ul, li {
 	  	if (confirm('리뷰를 삭제하시겠습니까?')) {
 		    $.ajax({
 				type : 'DELETE',
-				url : "/talents/talent/" + talentNo + "/reviews/" + reviewNo,
+				url : "/talent/" + talentNo + "/reviews/" + reviewNo,
 				data : JSON.stringify({
 					reviewNo : reviewNo,
 					talentNo : talentNo

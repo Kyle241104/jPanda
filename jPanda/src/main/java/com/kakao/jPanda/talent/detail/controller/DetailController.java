@@ -30,16 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/talents")
+@RequestMapping("/talent")
 public class DetailController {
 
 	private final TalentService talentService;
 	
 	// 재능 상세페이지 및 리뷰 리스트 불러오기
 	@NoLoginCheck
-	@GetMapping("/talent/{talentNo}")  //s
+	@GetMapping("/{talentNo}")
 	public String talentDetails(@PathVariable Long talentNo, Model model, HttpSession session) {
-		log.info("Controller talentDetails Start");
+		log.info("TalentDetails Controller Start");
 		// 조회수 업데이트
 		talentService.modifyTalentToViewCount(talentNo);
 		// 상세 페이지 탤런트 정보
@@ -56,12 +56,10 @@ public class DetailController {
 		return "talent/detail/talent";
 	}
 	
-	
-	// 리뷰 인서트
 	@ResponseBody
-	@PostMapping("/talent/{talentNo}/review") //s
+	@PostMapping("/{talentNo}/review")
 	public int reviewAdd(@RequestBody ReviewDto review) {
-		log.info("Controller reviewAdd Start");
+		log.info("ReviewAdd Start");
 		log.info("reviewInfo : " + review);
 	    // 리뷰 구매 검증 완료 후 인서트
 	    int reviewInsert = talentService.addReview(review);
@@ -70,13 +68,11 @@ public class DetailController {
 	    return reviewInsert;
 	}
 	
-	
-	// 리뷰 업데이트
 	@ResponseBody
-	@PutMapping("/talent/{talentNo}/reviews/{reviewNo}") //s
+	@PutMapping("/{talentNo}/reviews/{reviewNo}")
 	public List<ReviewDto> reviewModify(@PathVariable("talentNo") Long talentNo, @PathVariable("reviewNo") Long reviewNo, 
 							   @RequestBody ReviewDto review) {
-		log.info("Controller reviewModify Start");
+		log.info("ReviewModify Start");
 		
 	    int reviewUpdate = talentService.modifyReview(review);
 	    log.info("Review Update Success 1-> "+ reviewUpdate);
@@ -84,12 +80,10 @@ public class DetailController {
 		return talentService.findReviewListByTalentNo(talentNo);
 	}
 	
-	
-	// 리뷰 딜리트
 	@ResponseBody
-	@DeleteMapping("/talent/{talentNo}/reviews/{reviewNo}") //s
+	@DeleteMapping("/{talentNo}/reviews/{reviewNo}")
 	public int reviewRemove(@RequestBody ReviewDto review) {
-		log.info("Controller reviewRemove Start");
+		log.info("ReviewRemove Start");
 		
 		int reviewRemove = talentService.removeReview(review);
 		log.info("Review Delete Success 1-> "+ reviewRemove);
@@ -97,12 +91,11 @@ public class DetailController {
 		return reviewRemove;
 	}
 	
-	
 	// 게시글 상태 판매 종료로 전환
 	@ResponseBody
-	@PutMapping("/talent/{talentNo}/status")  //s
+	@PutMapping("/{talentNo}/status") 
 	public int talentStatusModify(@PathVariable Long talentNo) {
-		log.info("Controller talentStatusModify Start");
+		log.info("TalentStatusModify Start");
 		
 		int talentUpdate = talentService.updateTalentStatus(talentNo);
 		log.info("Talent Status Update Success 1-> " + talentUpdate);
@@ -113,9 +106,9 @@ public class DetailController {
 	
 	// 구매하기 버튼 인서트              
 	@ResponseBody
-	@PostMapping("/bambooUse") // /BambooUse
+	@PostMapping("/bambooUse") 
 	public int purchaseAdd(@RequestBody BambooUseDto bambooUse) {
-		log.info("Controller purchaseAdd Start");
+		log.info("PurchaseAdd Start");
 		
 		log.info("구매 회원 정보 -> " + bambooUse);
 		
@@ -127,26 +120,27 @@ public class DetailController {
 	}
 	
 	
-	// 신고하기 
-	@ResponseBody
-	@PostMapping("/talent/{talentNo}/report")  //s
-	public String reportAdd(@PathVariable Long talentNo, @RequestParam("reportId")String reportId, @RequestParam("blackId")String blackId, 
-					     @RequestParam("issue")String issue, @RequestParam("reportDate") Timestamp reportDate) {
-		log.info("Controller reportAdd Start");
-		ReportDto report = new ReportDto();
-		report.setBlackId(blackId);
-		report.setReportId(reportId);
-		report.setIssue(issue);
-		report.setReportDate(reportDate);
-		report.setTalentNo(talentNo);
-		log.info("신고 정보 -> " + report);
-		
-		String result = talentService.addReport(report);
-		log.info("신고 최종 결과 -> " + result);
-		
-		return result;
-	}
 	
-
+	 // 신고하기
+	 @ResponseBody
+	 @PostMapping("/{talentNo}/report")
+	 public String reportAdd(@PathVariable Long talentNo, @RequestParam("reportId")String reportId, @RequestParam("blackId")String blackId, 
+			 					@RequestParam("issue")String issue, @RequestParam("reportDate") Timestamp reportDate) { 
+		 log.info("ReportAdd Start"); 
+		 
+		 ReportDto report = new ReportDto(); 
+		 report.setBlackId(blackId); 
+		 report.setReportId(reportId);
+		 report.setIssue(issue); 
+		 report.setReportDate(reportDate);
+		 report.setTalentNo(talentNo); 
+		 
+		 log.info("신고 정보 -> " + report);
+		  
+		 String result = talentService.addReport(report); log.info("신고 최종 결과 -> " + result);
+	  
+		 return result; 
+	 
+	 }
 	
 }

@@ -26,8 +26,17 @@ ul, li {
 }  
 
 
+#board {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 30px;
+	position: relative;
+}
+
+
 /* 게시판 리스트 */
 .sell-board {
+	display:flex;
 	margin: 30px auto;
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -41,13 +50,13 @@ ul, li {
 #top-category {
 	font-size: 16px;
 	position: absolute;
+	text-align: center;
 	bottom: 20px;
 	left: 100px;
 	transform: translateY(-80%);
 	width: 250px;
 	border: 1px solid #ccc;
-	margin: 0 auto;
-	text-align: center;
+	margin: 0;
 	padding: 10px;
 	cursor: pointer;
 }
@@ -55,6 +64,27 @@ ul, li {
 .top-category {
 	font-weight: bold;
 	font-size: 19px;
+}
+
+@media screen and (max-width: 1650px) {
+	#board {
+		max-width: 100%;
+		padding: 0 20px;
+	}
+
+	.sell-board {
+		max-width: 100%;
+		margin: 30px 0;
+	}
+	
+	#top-category {
+		position: static;
+		transform: none;
+		width: 100%;
+		margin-bottom: 20px;
+		left: auto;
+		text-align: center;
+	}
 }
 
 
@@ -261,36 +291,36 @@ ul, li {
 	</ul>
 	</div>
 	
-	
-	<h3 class="lower-category">세부 카테고리</h3>
-	<select class="form-select" aria-label="Default select example" id="lower-category-list">
-		<option value="">==대분류 카테고리를 먼저 선택해주세요==</option>
-	</select>
-	
+	<div id="board">
+		<h3 class="lower-category">세부 카테고리</h3>
+		<select class="form-select" aria-label="Default select example" id="lower-category-list">
+			<option value="">==대분류 카테고리를 먼저 선택해주세요==</option>
+		</select>
 		
-	<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-	  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked="checked" value="reg_date">
-	  <label class="btn btn-outline-primary" for="btnradio1">최신순</label>
-	
-	  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="view_count">
-	  <label class="btn btn-outline-primary" for="btnradio2">인기순</label>
-	
-	  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value="bambooScore">
-	  <label class="btn btn-outline-primary" for="btnradio3">평점순</label>
-	  
-	  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" value="sale_bamboo">
-	  <label class="btn btn-outline-primary" for="btnradio4">높은 가격순</label>
-	  
-	  <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off" value="sale_bambooA">
-	  <label class="btn btn-outline-primary" for="btnradio5">낮은 가격순</label>
+			
+		<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+		  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked="checked" value="reg_date">
+		  <label class="btn btn-outline-primary" for="btnradio1">최신순</label>
+		
+		  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="view_count">
+		  <label class="btn btn-outline-primary" for="btnradio2">인기순</label>
+		
+		  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value="bambooScore">
+		  <label class="btn btn-outline-primary" for="btnradio3">평점순</label>
+		  
+		  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" value="sale_bamboo">
+		  <label class="btn btn-outline-primary" for="btnradio4">높은 가격순</label>
+		  
+		  <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off" value="sale_bambooA">
+		  <label class="btn btn-outline-primary" for="btnradio5">낮은 가격순</label>
+		</div>
+			
+	   
+		<div class="sell-board">
+		    <ul id="defalut-list"></ul>
+		</div>
 	</div>
 		
-   
-	<div class="sell-board">
-	    <ul id="defalut-list"></ul>
-	</div>
-
-	
 	<div id="page"></div>
 		<!-- 채팅 기능이 필요없는 페이지는 아래 한줄 지워주세요  -->
 		<th:block th:replace="/common/fragment/chat :: chatFragment"></th:block>
@@ -387,7 +417,7 @@ ul, li {
 						}
 					});
 		            li.click(function() {
-		                location.href = '/talents/talent/' + talent.talentNo;
+		                location.href = '/talent/' + talent.talentNo;
 		            });
 		        });
 	 	       	
