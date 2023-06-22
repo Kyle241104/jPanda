@@ -4,11 +4,17 @@
 
 제가 작성한 코드들 경로입니다
 
-main/java/com/kakao/jPanda/board
-main/java/com/kakao/jPanda/talent/detail
+jPanda/src/main/java/com/kakao/jPanda/board
+
+jPanda/src/main/java/com/kakao/jPanda/talent/detail
+
 templates/board/board.html
+
 templates/talent/detail/talent.html
+
 mappers/BoardMapper.xml
+
 mappers/TalentMapper.xml
+
 
 
